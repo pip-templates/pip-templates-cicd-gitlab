@@ -11,6 +11,7 @@ build:
   stage: build
   script:
   - echo "Build the app"
+  - ./tasks/increment.ps1
   - ./build.ps1
   - ./test.ps1
   - ./package.ps1
@@ -32,8 +33,8 @@ stage_deploy:
   - ./tasks/deploy.ps1
   - ./tasks/validate.ps1
   - ./tasks/promote.ps1
-  after_script:
   - ./tasks/rollback.ps1
+  after_script:
   - ./tasks/clean.ps1
   variables:
     ENVIRONMENT: stage
@@ -52,8 +53,8 @@ prod_deploy:
   - echo "Deploy into production environment"
   - ./tasks/deploy.ps1
   - ./tasks/validate.ps1
-  after_script:
   - ./tasks/rollback.ps1
+  after_script:
   - ./tasks/clean.ps1
   variables:
     ENVIRONMENT: prod
